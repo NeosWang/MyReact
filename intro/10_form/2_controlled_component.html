@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+    class Login extends React.Component {
+        // initialize state
+        state = {
+            username: '',
+            password: ''
+        }
+        render() {
+            return (
+                <form action="http://www.baidu.com" onSubmit={this.handelSubmit}>
+                    username:<input onChange={this.saveUsername} type="text" name="username" />
+                    password:<input onChange={this.savePassword} type="text" name="password" />
+                    <button>log-in</button>
+                </form>
+            )
+        }
+        handelSubmit = (event) => {
+            event.preventDefault()
+            const {username, password} = this.state
+            alert(`${username} & ${password}`)
+        }
+
+        saveUsername = (event) => {
+            // console.log(event.target.value)
+            this.setState({ username: event.target.value })
+        }
+        savePassword = (event) => {
+            this.setState({ password: event.target.value })
+        }
+    }
+
+    ReactDOM.render(<Login />, document.getElementById('test'));
+
+</script>
+
+</html>

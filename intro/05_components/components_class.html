@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+    <style>
+        .title {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+    class MyComponent extends React.Component{
+        // render 在类的原型对象上，供示例使用
+        render(){
+            return<h2>类渲染的组件</h2>
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById('test'));
+    // 解析标签，找到组件，new实例，调用render方法，返回虚拟DOM,渲染在页面上
+
+</script>
+
+</html>

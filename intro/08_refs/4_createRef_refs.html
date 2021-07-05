@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+    class Demo extends React.Component {
+        /*
+        React.createRef调用后可以返回一个容器，该容器可以存储被ref标记的节点
+        专人专用（存一个）
+        */
+        myRef = React.createRef()
+        myRef2 = React.createRef()
+    
+        render() {
+            return (
+                <div>
+                    <input ref={this.myRef} type="text" placeholder="click button show data"/>
+                    <button onClick={this.showInfo}>input data</button>
+                    <input ref={this.myRef2} onBlur={this.showInfo2} type="text" placeholder="on blur show data"/>
+                </div>
+            )
+        }
+
+        showInfo=()=>{
+            alert(this.myRef.current.value)
+        }
+        showInfo2=()=>{
+            alert(this.myRef2.current.value)
+        }
+
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById('test'));
+
+</script>
+
+</html>

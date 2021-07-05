@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+    class Demo extends React.Component{
+        /* 通过onXxx属性指定事件处理函数(注意大小写)
+        react使用的是自定义合成事件，不是使用原生DOM
+        react中的事件是通过事件委托方式处理的，委托给组件最外层元素
+        通过event.target得到发生事件的DOM元素对象,所以第一个input不能省略ref，但是第二个可以省略 -- 不要过度使用ref
+        */
+        /*
+        创建ref容器
+         */
+        myRef = React.createRef()
+        myRef2 = React.createRef()
+
+        render() {
+            return (
+                <div>
+                    <input ref={this.myRef} type="text" placeholder="click button show data" />
+                    <button onClick={this.showInfo}>input data</button>
+                    <input onBlur={this.showInfo2} type="text" placeholder="on blur show data" />
+                </div>
+            )
+        }
+
+        showInfo = () => {
+            alert(this.myRef.current.value)
+        }
+        showInfo2 = (event) => {
+            alert(event.target.value)
+        }
+
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById('test'));
+
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+    <style>
+        .title {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/javascript">    /*  注意，用babel */
+
+class Person{
+    constructor(name, age){
+        this.name=name;
+        this.age=age;
+    }
+
+    hand=2;
+    speak(){
+        console.log(`i am ${this.name}, ${this.age} years old`);
+    }
+
+}
+
+class Student extends Person{
+    constructor(name, age, grade){
+        super(name, age); //super 放在最前面
+        this.grade=grade;
+    }
+    speak(){
+        console.log(`i am ${this.name}, ${this.age} years old, i am in ${this.grade}`);
+    }
+    study(){
+        console.log(`i am studying`)
+    }
+
+}
+
+const p1=new Person('a',10);
+
+const s1 = new Student('b',12,'g1');
+
+</script>
+
+</html>

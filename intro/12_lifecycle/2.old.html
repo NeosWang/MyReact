@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  
+    /*
+            =挂载时=                      父组件render
+        constructor                  componentWillReceiveProps
+        componentWillMount          shouldComponentUpdate    <---- setState()
+                                    componentWillUpdate        <----forceUpdate()
+                            render
+        componentDidMount           componentDidUpdate
+                    componentWillUnmount
+    
+    */
+
+
+    //生命周期钩子函数
+    class Count extends React.Component {
+
+        constructor(props){
+            console.log('count---constructor')
+            super(props)
+            this.state={count:0}
+        }
+
+        componentWillReceiveProps(){
+            console.log('count---componentWillReceiveProps')
+        }
+
+        shouldComponentUpdate(){
+            console.log('count---shouldComponentUpdate')
+            return true //show update and render
+            return false
+        }
+
+        componentWillUpdate(){
+            console.log('count---componentWillUpdate')
+        }
+        
+        componentWillMount(){
+            console.log('count---componentWillMount')
+        }
+
+        componentDidUpdate(){
+            console.log('count---componentDidUpdate')
+        }
+
+        componentDidMount(){
+            console.log('count---componentDidMount')
+        }
+
+        componentWillUnmount(){
+            console.log('count---componentWillUnmount')
+        }
+        // render调用实际： 初始化， state更新
+        render() {
+            const {count} = this.state
+            console.log('count---render')
+            return (
+                <div>
+                    <h2 style={{ opacity: this.state.opacity }}>sum is: {count}</h2>
+                    <button onClick={this.add}>+1</button>
+                    <button onClick={this.death}>unmount</button>
+                    <button onClick={this.force}>force update</button>
+
+                </div>
+            )
+        }
+
+        add = () => {           
+            let {count} = this.state
+            this.setState({count:count+1})
+        }
+        
+        death =()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        force =()=>{
+            this.forceUpdate()
+        }
+
+    }
+
+    ReactDOM.render(<Count />, document.getElementById('test'))
+</script>
+
+</html>

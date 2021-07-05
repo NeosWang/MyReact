@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+    <style>
+        .title {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+class Weather extends React.Component{
+    // 构造器调用1次
+    constructor (props){
+        super(props);
+        this.state = {isHot:true, wind:'大风'};
+        // 解决 this 的指向问题
+        this.changeWeather = this.changeWeather1.bind(this);
+    }
+
+    // render 调用1+n次： 1 是初始化，n是点击次数
+    render(){
+        const {isHot, wind} = this.state;
+        return <h1 onClick={this.changeWeather} >今天天气很{isHot?'炎热':'凉爽'}, {wind}</h1> //onclick => onClick 方法不带（） 
+    }
+
+    // changeWeather 点几次调用几次
+    changeWeather1(){
+        // changeWeathr 在原型对象上，供实例调用
+        // 由于changeweather是作为onClick的回调，所以不是实例调用，是直接调用
+        // 类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined。
+       
+        // state 内的数据不能直接修改, 要借助setState, 且更新是合并，不是替换
+        const isHot = this.state.isHot
+        this.setState({isHot:!this.state.isHot})
+    }
+}
+
+ReactDOM.render(<Weather/>, document.getElementById('test'))
+
+
+</script>
+
+</html>

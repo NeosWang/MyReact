@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  
+    /*
+            =挂载时=                      父组件render
+        constructor                  componentWillReceiveProps
+        componentWillMount          shouldComponentUpdate    <---- setState()
+                                    componentWillUpdate        <----forceUpdate()
+                            render
+        componentDidMount           componentDidUpdate
+                    componentWillUnmount
+    
+    */
+   /*
+   1. 初始化阶段： 有ReactDOM.render() 触发 --- 初次渲染
+        1. constructor()
+        2. componentWillMount()
+        3. render()
+        4. componentDidMount()
+    2. 更新阶段： 由组件this.setState() 或父组件render触发
+        1. shouldComponentUpdate()
+        2. componentWillUpdate()
+        3. render()
+        4. componentDidUpdate()
+    3. 写在组件： 由ReactDOM.unmountComponentAtNode()触发
+        1. componentWillUnnmount()
+   
+   */
+
+
+    //生命周期钩子函数
+    class Count extends React.Component {
+
+        constructor(props){
+            console.log('count---constructor')
+            super(props)
+            this.state={count:0}
+        }
+
+
+
+        shouldComponentUpdate(){
+            console.log('count---shouldComponentUpdate')
+            return true //show update and render
+            return false
+        }
+
+        componentWillUpdate(){
+            console.log('count---componentWillUpdate')
+        }
+        
+        componentWillMount(){
+            console.log('count---componentWillMount')
+        }
+
+        componentDidUpdate(){
+            console.log('count---componentDidUpdate')
+        }
+
+        componentDidMount(){
+            console.log('count---componentDidMount')
+        }
+
+        componentWillUnmount(){
+            console.log('count---componentWillUnmount')
+        }
+        // render调用实际： 初始化， state更新
+        render() {
+            const {count} = this.state
+            console.log('count---render')
+            return (
+                <div>
+                    <h2 style={{ opacity: this.state.opacity }}>sum is: {count}</h2>
+                    <button onClick={this.add}>+1</button>
+                    <button onClick={this.death}>unmount</button>
+                    <button onClick={this.force}>force update</button>
+
+                </div>
+            )
+        }
+
+        add = () => {           
+            let {count} = this.state
+            this.setState({count:count+1})
+        }
+        
+        death =()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        force =()=>{
+            this.forceUpdate()
+        }
+
+    }
+
+    class A extends React.Component{
+        state = {carName:'BMW'}
+        render(){
+            return(
+                <div>
+                    <div>i am A</div>    
+                    <button onClick={this.changeCar}>change car</button>
+                    <B carName={this.state.carName}/>
+                </div>
+            )
+        }
+
+        changeCar=()=>{
+            this.setState({carName:'toyota'})
+        }
+    }
+
+    class B extends React.Component{
+        componentWillReceiveProps(){
+            console.log('B---componentWillReceiveProps',this.props)
+        }
+        render(){
+            console.log('B---render', this. props)
+            return(
+                <div>i am B, get car: {this.props.carName}</div>
+            )
+        }
+    }
+
+    ReactDOM.render(<A />, document.getElementById('test'))
+</script>
+
+</html>

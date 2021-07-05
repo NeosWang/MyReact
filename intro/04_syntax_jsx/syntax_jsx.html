@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+    <style>
+        .title {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">    /*  注意，用babel */
+
+    const myId = 'fuckId';
+    const myData = 'fuckData111';
+
+    // create virtual DOM
+    const VDOM = (
+        <div>
+            <h1 className="title" id={myId.toLowerCase()}>
+                <span style={{ color: 'green', fontSize: '1px' }}>{myData.toLocaleLowerCase()}</span>
+            </h1>
+            <h1 className="title" id={myId.toUpperCase()}>
+                <span style={{ color: 'green', fontSize: '1px' }}>{myData.toLocaleLowerCase()}</span>
+            </h1>
+            <input type="text"/>
+        </div>
+
+    )  /* 没引号*/
+    // render virtual DOM to page
+    ReactDOM.render(VDOM, document.getElementById('test'))
+
+    // 定义虚拟DOM不要用引号
+    // 混入js表达式用{}
+    // sytle 类名用classNme 不用class
+    // 内联样式用style={key:value 小驼峰}
+    // 虚拟DOM只能有一个根标签
+    // 标签必须闭合
+    // 标签首字母：1.若小写开头，则转为html同名标签，无标签则报错。 2.若大写开头，渲染对应组件，若组件无定义则报错
+
+
+</script>
+
+</html>

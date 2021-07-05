@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello _react</title>
+
+</head>
+
+<body>
+    <div id='test'></div>
+
+</body>
+<!-- React -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- ReactDOM -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  
+
+
+    //生命周期钩子函数
+    class Count extends React.Component {
+
+        constructor(props){
+            console.log('count---constructor')
+            super(props)
+            this.state={count:0}
+        }
+
+
+
+        shouldComponentUpdate(){
+            console.log('count---shouldComponentUpdate')
+            return true //show update and render
+            return false
+        }
+
+
+        componentDidUpdate(preProps, preState, snapshotValue){
+            console.log('count---componentDidUpdate', preProps, preState, snapshotValue)
+        }
+
+        componentDidMount(){
+            console.log('count---componentDidMount')
+        }
+
+        componentWillUnmount(){
+            console.log('count---componentWillUnmount')
+        }
+
+        static getDerivedStateFromProps(props, state){
+            console.log('count---getDerivedStateFromProps',props,state)
+            // return props
+            return null
+        }
+
+        getSnapshotBeforeUpdate(){
+            console.log('count---getSnapshotBeforeUpdate')
+            return 'shit'
+
+        }
+
+
+        // render调用实际： 初始化， state更新
+        render() {
+            const {count} = this.state
+            console.log('count---render')
+            return (
+                <div>
+                    <h2 style={{ opacity: this.state.opacity }}>sum is: {count}</h2>
+                    <button onClick={this.add}>+1</button>
+                    <button onClick={this.death}>unmount</button>
+                    <button onClick={this.force}>force update</button>
+
+                </div>
+            )
+        }
+
+        add = () => {           
+            let {count} = this.state
+            this.setState({count:count+1})
+        }
+        
+        death =()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        force =()=>{
+            this.forceUpdate()
+        }
+
+    }
+
+
+
+    ReactDOM.render(<Count count={88} />, document.getElementById('test'))
+</script>
+
+</html>
