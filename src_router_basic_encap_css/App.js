@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch , Redirect} from 'react-router-dom'
+import { Route, Switch,Redirect } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Header from './components/Header'
@@ -21,16 +21,18 @@ export default class App extends Component {
               {/* <a className="list-group-item" href="./about.html">About</a>
               <a className="list-group-item active" href="./home.html">Home</a> */}
               <MyNavLink to='/home'>Home</MyNavLink>
-              <MyNavLink to='/about'>About</MyNavLink>
+              {/*fuzzy match url*/}
+              <MyNavLink to='/about/a/b'>About</MyNavLink> 
             </div>
           </div>
           <div className="col-xs-6">
             <div className="panel">
               <div className="panel-body">
                 <Switch>
-                  <Route path="/about" component={About} />
+                  {/*strict match url*/}
+                  <Route exact path="/about" component={About} />
                   <Route path="/home" component={Home} />
-                  <Redirect to="/home"/>
+                  <Redirect to="/about" />
                 </Switch>
               </div>
             </div>
