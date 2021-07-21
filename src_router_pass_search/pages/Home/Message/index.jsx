@@ -23,16 +23,7 @@ export default class Message extends Component {
                   {/*<Link to={`/home/message/detail/${msgObj.id}/${msgObj.title}`}>{msgObj.title}</Link>*/}
 
                   {/*pass search*/}
-                  {/* <Link to={`/home/message/detail/?id=${msgObj.id}&title=${msgObj.title}`}>{msgObj.title}</Link> */}
-
-                  {/* pass state */}
-                  <Link to={{
-                    pathname: '/home/message/detail',
-                    state: {
-                      id: msgObj.id,
-                      title: msgObj.title
-                    }
-                  }}>{msgObj.title}</Link>
+                  <Link to={`/home/message/detail/?id=${msgObj.id}&title=${msgObj.title}`}>{msgObj.title}</Link>
                 </li>
               )
             })
@@ -43,9 +34,6 @@ export default class Message extends Component {
         {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
 
         {/* search dont need declare */}
-        {/* <Route path="/home/message/detail" component={Detail} /> */}
-
-        {/* state dont need declare */}
         <Route path="/home/message/detail" component={Detail} />
       </div>
     )
