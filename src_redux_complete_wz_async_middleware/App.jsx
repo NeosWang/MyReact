@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Sum from './containers/Sum'
-import store from './redux/store'
+import Sum from './components/Sum_redux'
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <Sum store={store}/>
+        <Sum/>
       </div>
     )
   }
