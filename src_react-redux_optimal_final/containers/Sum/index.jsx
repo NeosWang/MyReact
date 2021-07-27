@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  increment,
+  decrement,
+  incrementAsync,
+} from '../../redux/actions/sum'
 
-
-export default class Sum extends Component {
+// UI component
+class Sum extends Component {
 
   state = { others: 'shit' }
   increment = () => {
@@ -21,15 +27,14 @@ export default class Sum extends Component {
 
   incrementAsync = () => {
     const { value } = this.selectedNumber
-    this.props.incrementAsync(value * 1,800)
+    this.props.incrementAsync(value * 1, 800)
   }
-
-
 
   render() {
     return (
       <div>
-        <h1>Sum: {this.props.sum}</h1>
+        <h2>Sum component</h2>
+        <h3>Sum: {this.props.sum}, number of person:{this.props.population}</h3>
         <select ref={c => this.selectedNumber = c}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -43,3 +48,22 @@ export default class Sum extends Component {
     )
   }
 }
+
+
+
+
+// simplify, auto dispatch
+export default connect(
+  state => ({
+    sum: state.sum,
+    population: state.persons.length
+  }),
+  {
+    increment, //function from action
+    decrement,
+    incrementAsync,
+  }
+)(Sum)
+
+
+

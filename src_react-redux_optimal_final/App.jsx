@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import Demo from './components/2_lazyLoad'
-
+import Sum from './containers/Sum'
+import Person from './containers/Person'
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <Demo/>
+        <Sum/>
+        <hr/>
+        <Person/>
       </div>
     )
   }
