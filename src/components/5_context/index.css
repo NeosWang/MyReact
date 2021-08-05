@@ -1,0 +1,22 @@
+.parent{
+  width:500px;
+  background-color: aqua;
+  padding: 10px;
+}
+
+.child{
+  width: 100%;
+  background-color:blanchedalmond;
+  padding: 10px;
+}
+
+.grandchild{
+  width:100%;
+  background-color: chocolate;
+  padding: 10px;
+}
+.grandgrandchild{
+  width:100%;
+  background-color:yellowgreen;
+  padding: 10px;
+}

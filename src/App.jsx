@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import Demo from './components/2_lazyLoad'
+import React, { PureComponent } from 'react'
+import Demo from './components/8_error_boundary/Parent'
 
 
-export default class App extends Component {
+export default class App extends PureComponent {
   render() {
     return (
       <div>
